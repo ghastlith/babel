@@ -20,6 +20,7 @@ repositories {
 dependencies {
   // spring
   implementation("org.springframework.boot:spring-boot-starter")
+  implementation("org.springframework.boot:spring-boot-starter-validation")
 
   // tests
   testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -30,6 +31,9 @@ dependencies {
   annotationProcessor("org.projectlombok:lombok:1.18.38")
   testCompileOnly("org.projectlombok:lombok:1.18.38")
   testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
+
+  // picocli
+  implementation("info.picocli:picocli:4.7.7")
 }
 
 tasks.withType<Test>().configureEach {

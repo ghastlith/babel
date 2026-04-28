@@ -1,13 +1,26 @@
 package ghastlith.passwordgenerator;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-public class Main  {
+import ghastlith.passwordgenerator.argument.ArgumentProcessor;
+import lombok.AllArgsConstructor;
 
-    public static void main(final String[] args) {
-        SpringApplication.run(Main.class, args);
-    }
+@SpringBootApplication
+@AllArgsConstructor
+public class Main implements CommandLineRunner {
+
+  @Autowired private ArgumentProcessor argumentProcessor;
+
+  public static void main(final String[] args) {
+    SpringApplication.run(Main.class, args);
+  }
+
+  @Override
+  public void run(final String... args) throws Exception {
+    final var arguments = argumentProcessor.parse(args);
+  }
 
 }
