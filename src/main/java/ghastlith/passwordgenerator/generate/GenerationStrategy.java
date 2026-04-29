@@ -1,5 +1,8 @@
 package ghastlith.passwordgenerator.generate;
 
+import java.time.Instant;
+import java.util.Optional;
+
 import ghastlith.passwordgenerator.argument.InputArguments;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -17,8 +20,12 @@ public record GenerationStrategy(
 ) {
 
   public static GenerationStrategy fromInputArguments(final InputArguments arguments) {
+    final var seed = Optional.ofNullable(arguments.getSeed())
+        .orElseGet(() -> Instant.now().toString())
+        .getBytes();
+
     return GenerationStrategy.builder()
-        .seed(arguments.getSeed().getBytes())
+        .seed(seed)
         .length(arguments.getLength())
         .isAlphanumeric(arguments.isAlphanumeric())
         .build();

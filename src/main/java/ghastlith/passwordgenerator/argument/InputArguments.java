@@ -9,7 +9,7 @@ import picocli.CommandLine.Unmatched;
 @Getter
 public class InputArguments {
 
-  @Option(names = "--seed", defaultValue = "")
+  @Option(names = "--seed")
   private String seed;
 
   @Option(names = "--length", defaultValue = "16")
