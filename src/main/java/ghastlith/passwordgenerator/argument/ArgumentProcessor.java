@@ -11,7 +11,7 @@ import picocli.CommandLine;
 @Slf4j
 public class ArgumentProcessor {
 
-  private static final String UNMATCHED_LOG_FORMAT = "Unrecognized argument: {}";
+  private static final String UNMATCHED_LOG_FORMAT = "unrecognized argument: {}";
 
   public Arguments parse(final String... args) {
     final var arguments = new Arguments();
