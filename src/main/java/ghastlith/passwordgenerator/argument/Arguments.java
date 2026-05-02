@@ -7,7 +7,7 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Unmatched;
 
 @Getter
-public class InputArguments {
+public class Arguments {
 
   @Option(names = "--length", defaultValue = "24")
   private int length;

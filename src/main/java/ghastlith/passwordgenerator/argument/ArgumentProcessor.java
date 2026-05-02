@@ -11,14 +11,14 @@ import picocli.CommandLine;
 @Slf4j
 public class ArgumentProcessor {
 
-  private static final String UNMATCHED_ARG_LOG_FORMAT = "Unrecognized argument: {}";
+  private static final String UNMATCHED_LOG_FORMAT = "Unrecognized argument: {}";
 
-  public InputArguments parse(final String... args) {
-    final var arguments = new InputArguments();
+  public Arguments parse(final String... args) {
+    final var arguments = new Arguments();
 
     parser(arguments).parseArgs(args);
     arguments.getUnmatched()
-        .forEach(arg -> log.warn(UNMATCHED_ARG_LOG_FORMAT, arg));
+        .forEach(arg -> log.warn(UNMATCHED_LOG_FORMAT, arg));
 
     return arguments;
   }
