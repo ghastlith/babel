@@ -35,6 +35,16 @@ public class GenerationEngine {
     return password;
   }
 
+  private String getRandomCharacters(final String set, final int length) {
+    final var upperBound = set.length();
+
+    return random.ints(RANDOM_LOWER_BOUND, upperBound)
+        .limit(length)
+        .mapToObj(set::charAt)
+        .map(String::valueOf)
+        .collect(joining());
+  }
+
   private String shuffleCharacters(final String... parts) {
     final var characters = Arrays.stream(parts)
         .collect(joining())
@@ -45,16 +55,6 @@ public class GenerationEngine {
     Collections.shuffle(characters);
 
     return characters.stream()
-        .map(String::valueOf)
-        .collect(joining());
-  }
-
-  private String getRandomCharacters(final String set, final int length) {
-    final var upperBound = set.length();
-
-    return random.ints(RANDOM_LOWER_BOUND, upperBound)
-        .limit(length)
-        .mapToObj(set::charAt)
         .map(String::valueOf)
         .collect(joining());
   }
