@@ -1,5 +1,6 @@
 package ghastlith.passwordgenerator.argument;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Getter;
@@ -19,6 +20,6 @@ public class Arguments {
   private boolean isAlphanumeric;
 
   @Unmatched
-  private List<String> unmatched;
+  private List<String> unmatched = new ArrayList<>();
 
 }
