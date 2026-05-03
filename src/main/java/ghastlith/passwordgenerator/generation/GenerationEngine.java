@@ -16,6 +16,9 @@ import org.springframework.validation.annotation.Validated;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Manages and performs all password generation related operations.
+ */
 @Component
 @Validated
 @RequiredArgsConstructor
@@ -25,6 +28,14 @@ public class GenerationEngine {
 
   private static final int RANDOM_LOWER_BOUND = 0;
 
+  /**
+   * Generate random sets of characters based on the {@link GenerationPolicy}
+   * rules and then shuffle them based on currently built entropy present on
+   * {@link SecureRandom}.
+   *
+   * @param policy the set of rules to generate a password
+   * @return The generated password string.
+   */
   public String generatePassword(@Valid final GenerationPolicy policy) {
     final var letters = getRandomUnits(LETTERS, policy.lettersLength());
     final var numbers = getRandomUnits(NUMBERS, policy.numbersLength());

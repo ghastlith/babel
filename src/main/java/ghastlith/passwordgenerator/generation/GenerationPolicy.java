@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Builder;
 
+/**
+ * The policy used when generating a new random password.
+ */
 @Builder
 public record GenerationPolicy(
     @Min(value = 16, message = "Length must be at least 16")
@@ -16,6 +19,13 @@ public record GenerationPolicy(
   private static final float NON_ALPHANUMERIC_WEIGHT = 0.25f;
   private static final int BASE_LENGTH = 0;
 
+  /**
+   * Constructor that builds a GenerationPolicy to delegate how a new password
+   * should be made.
+   *
+   * @param arguments the {@link Arguments} inputted by the user
+   * @return The GenerationPolicy based on user inputted arguments.
+   */
   public static GenerationPolicy fromArguments(final Arguments arguments) {
     return GenerationPolicy.builder()
         .length(arguments.getLength())
@@ -23,6 +33,11 @@ public record GenerationPolicy(
         .build();
   }
 
+  /**
+   * Calculate the amount of letters a password should have.
+   *
+   * @return The calculated length.
+   */
   public int lettersLength() {
     final var numbers = numbersLength();
     final var special = specialLength();
@@ -30,10 +45,20 @@ public record GenerationPolicy(
     return length() - numbers - special;
   }
 
+  /**
+   * Calculate the amount of numbers a password should have.
+   *
+   * @return The calculated length.
+   */
   public int numbersLength() {
     return (int) Math.ceil(length() * NON_ALPHANUMERIC_WEIGHT);
   }
 
+  /**
+   * Calculate the amount of special characters a password should have.
+   *
+   * @return The calculated length.
+   */
   public int specialLength() {
     return hasSymbols ? numbersLength() : BASE_LENGTH;
   }

@@ -6,6 +6,9 @@ import lombok.Getter;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Unmatched;
 
+/**
+ * Data object parsed from user inputted application arguments.
+ */
 @Getter
 public class Arguments {
 

@@ -1,5 +1,9 @@
 package ghastlith.passwordgenerator.generation;
 
+/**
+ * Wrapper class that delegates static sets containing the lists of characters
+ * allowed during password generation.
+ */
 public class CharacterSet {
 
   public static final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
