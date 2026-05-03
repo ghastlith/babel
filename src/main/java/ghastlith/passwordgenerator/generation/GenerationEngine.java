@@ -26,16 +26,16 @@ public class GenerationEngine {
   private static final int RANDOM_LOWER_BOUND = 0;
 
   public String generatePassword(@Valid final GenerationPolicy policy) {
-    final var letters = getRandomCharacters(LETTERS, policy.lettersLength());
-    final var numbers = getRandomCharacters(NUMBERS, policy.numbersLength());
-    final var special = getRandomCharacters(SPECIAL, policy.specialLength());
+    final var letters = getRandomUnits(LETTERS, policy.lettersLength());
+    final var numbers = getRandomUnits(NUMBERS, policy.numbersLength());
+    final var special = getRandomUnits(SPECIAL, policy.specialLength());
 
-    final var password = shuffleCharacters(letters, numbers, special);
+    final var password = mergeAndShuffle(letters, numbers, special);
 
     return password;
   }
 
-  private String getRandomCharacters(final String set, final int length) {
+  private String getRandomUnits(final String set, final int length) {
     final var upperBound = set.length();
 
     return random.ints(RANDOM_LOWER_BOUND, upperBound)
@@ -45,7 +45,7 @@ public class GenerationEngine {
         .collect(joining());
   }
 
-  private String shuffleCharacters(final String... parts) {
+  private String mergeAndShuffle(final String... parts) {
     final var characters = Arrays.stream(parts)
         .collect(joining())
         .chars()
