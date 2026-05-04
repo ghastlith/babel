@@ -1,7 +1,6 @@
 package ghastlith.passwordgenerator.generation;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
@@ -33,8 +32,8 @@ public class GenerationPolicyTest {
     final var violations = validator.validate(policy);
 
     // then
-    assertEquals(18, policy.length());
-    assertEquals(!mockArguments.isAlphanumeric(), policy.hasSymbols());
+    assertThat(policy.length()).isEqualTo(18);
+    assertThat(policy.hasSymbols()).isNotEqualTo(mockArguments.isAlphanumeric());
     assertThat(violations).isEmpty();
   }
 
@@ -65,7 +64,7 @@ public class GenerationPolicyTest {
     final var length = policy.lettersLength();
 
     // then
-    assertEquals(10, length);
+    assertThat(length).isEqualTo(10);
   }
 
   @Test
@@ -80,7 +79,7 @@ public class GenerationPolicyTest {
     final var length = policy.lettersLength();
 
     // then
-    assertEquals(16, length);
+    assertThat(length).isEqualTo(16);
   }
 
   @Test
@@ -94,7 +93,7 @@ public class GenerationPolicyTest {
     final var length = policy.numbersLength();
 
     // then
-    assertEquals(7, length);
+    assertThat(length).isEqualTo(7);
   }
 
   @Test
@@ -109,7 +108,7 @@ public class GenerationPolicyTest {
     final var length = policy.specialLength();
 
     // then
-    assertEquals(8, length);
+    assertThat(length).isEqualTo(8);
   }
 
   @Test
@@ -124,7 +123,7 @@ public class GenerationPolicyTest {
     final var length = policy.specialLength();
 
     // then
-    assertEquals(0, length);
+    assertThat(length).isEqualTo(0);
   }
 
 }

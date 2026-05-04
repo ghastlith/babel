@@ -2,9 +2,6 @@ package ghastlith.passwordgenerator.argument;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,8 +30,8 @@ public class ArgumentProcessorTest {
     final var arguments = argumentProcessor.parse(args);
 
     // then
-    assertEquals(16, arguments.getLength());
-    assertTrue(arguments.isAlphanumeric());
+    assertThat(arguments.getLength()).isEqualTo(16);
+    assertThat(arguments.isAlphanumeric()).isTrue();
   }
 
   @Test
@@ -46,8 +43,8 @@ public class ArgumentProcessorTest {
     final var arguments = argumentProcessor.parse(args);
 
     // then
-    assertEquals(20, arguments.getLength());
-    assertFalse(arguments.isAlphanumeric());
+    assertThat(arguments.getLength()).isEqualTo(20);
+    assertThat(arguments.isAlphanumeric()).isFalse();
   }
 
   @Test
@@ -59,8 +56,8 @@ public class ArgumentProcessorTest {
     final var arguments = argumentProcessor.parse(args);
 
     // then
-    assertEquals(24, arguments.getLength());
-    assertTrue(arguments.isAlphanumeric());
+    assertThat(arguments.getLength()).isEqualTo(24);
+    assertThat(arguments.isAlphanumeric()).isTrue();
   }
 
   @Test
@@ -72,8 +69,8 @@ public class ArgumentProcessorTest {
     final var arguments = argumentProcessor.parse(args);
 
     // then
-    assertEquals(28, arguments.getLength());
-    assertTrue(arguments.isAlphanumeric());
+    assertThat(arguments.getLength()).isEqualTo(28);
+    assertThat(arguments.isAlphanumeric()).isTrue();
   }
 
   @Test
@@ -85,7 +82,7 @@ public class ArgumentProcessorTest {
     final var arguments = argumentProcessor.parse(args);
 
     // then
-    assertEquals(1, arguments.getUnmatched().size());
+    assertThat(arguments.getUnmatched().size()).isEqualTo(1);
     assertThat(output.getOut()).contains("unrecognized argument: --unmatched");
   }
 
