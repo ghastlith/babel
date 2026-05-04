@@ -18,23 +18,23 @@ import jakarta.validation.Validator;
 @ExtendWith(MockitoExtension.class)
 public class GenerationPolicyTest {
 
-  @Mock private Arguments arguments;
+  @Mock private Arguments mockArguments;
 
   private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
   @Test
   void fromArguments_shouldBuildAndInsertValuesCorrectly() {
     // given
-    when(arguments.getLength()).thenReturn(18);
-    when(arguments.isAlphanumeric()).thenReturn(true);
+    when(mockArguments.getLength()).thenReturn(18);
+    when(mockArguments.isAlphanumeric()).thenReturn(true);
 
     // when
-    final var policy = GenerationPolicy.fromArguments(arguments);
+    final var policy = GenerationPolicy.fromArguments(mockArguments);
     final var violations = validator.validate(policy);
 
     // then
     assertEquals(18, policy.length());
-    assertEquals(!arguments.isAlphanumeric(), policy.hasSymbols());
+    assertEquals(!mockArguments.isAlphanumeric(), policy.hasSymbols());
     assertThat(violations).isEmpty();
   }
 
