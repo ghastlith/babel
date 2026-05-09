@@ -1,1 +1,1 @@
-rootProject.name = "password-generator"
+rootProject.name = "cerberus"

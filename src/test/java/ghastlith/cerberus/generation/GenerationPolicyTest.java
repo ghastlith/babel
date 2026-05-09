@@ -1,4 +1,4 @@
-package ghastlith.passwordgenerator.generation;
+package ghastlith.cerberus.generation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import ghastlith.passwordgenerator.argument.Arguments;
+import ghastlith.cerberus.argument.Arguments;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 

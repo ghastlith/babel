@@ -1,4 +1,4 @@
-package ghastlith.passwordgenerator.argument;
+package ghastlith.cerberus.argument;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package ghastlith.passwordgenerator.generation;
+package ghastlith.cerberus.generation;
 
 /**
  * Wrapper class that delegates static sets containing the lists of characters

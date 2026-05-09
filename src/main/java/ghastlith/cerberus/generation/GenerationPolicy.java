@@ -1,6 +1,6 @@
-package ghastlith.passwordgenerator.generation;
+package ghastlith.cerberus.generation;
 
-import ghastlith.passwordgenerator.argument.Arguments;
+import ghastlith.cerberus.argument.Arguments;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Builder;

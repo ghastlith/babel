@@ -1,8 +1,8 @@
-package ghastlith.passwordgenerator.generation;
+package ghastlith.cerberus.generation;
 
-import static ghastlith.passwordgenerator.generation.CharacterSet.LETTERS;
-import static ghastlith.passwordgenerator.generation.CharacterSet.NUMBERS;
-import static ghastlith.passwordgenerator.generation.CharacterSet.SPECIAL;
+import static ghastlith.cerberus.generation.CharacterSet.LETTERS;
+import static ghastlith.cerberus.generation.CharacterSet.NUMBERS;
+import static ghastlith.cerberus.generation.CharacterSet.SPECIAL;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 

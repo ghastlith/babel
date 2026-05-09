@@ -1,4 +1,4 @@
-# password-generator
+# cerberus
 
 A simple application that generates random passwords with customizable patterns. The generation is based on Java's SecureRandom and Instant timestamp at time of usage to increase entropy.
 
@@ -15,8 +15,8 @@ The `length` will determine the exact size of the password to be generated.
 > `values` anywhere between 16 through 32
 
 ```bash
-passwordgenerator --length=20
-passwordgenerator --l=20
+cerberus --length=20
+cerberus --l=20
 ```
 
 </details>
@@ -30,8 +30,8 @@ The `alphanumeric` flag will determine if the password consists only of alphanum
 > `values` true if present otherwise false
 
 ```bash
-passwordgenerator --alphanumeric
-passwordgenerator --a
+cerberus --alphanumeric
+cerberus --a
 ```
 
 </details>
@@ -41,11 +41,11 @@ passwordgenerator --a
 To run the application in Docker, you simply build the image.
 
 ```sh
-docker build . -t passwordgenerator
+docker build . -t cerberus
 ```
 
 Then run the container with the desired generation option arguments.
 
 ```sh
-docker run --rm passwordgenerator --length=25 --alphanumeric
+docker run --rm cerberus --length=25 --alphanumeric
 ```

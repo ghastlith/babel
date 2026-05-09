@@ -1,4 +1,4 @@
-package ghastlith.passwordgenerator.argument;
+package ghastlith.cerberus.argument;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;

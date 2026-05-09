@@ -1,4 +1,4 @@
-package ghastlith.passwordgenerator.argument;
+package ghastlith.cerberus.argument;
 
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package ghastlith.passwordgenerator.generation;
+package ghastlith.cerberus.generation;
 
 import java.security.SecureRandom;
 import java.time.Instant;

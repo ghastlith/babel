@@ -1,4 +1,4 @@
-package ghastlith.passwordgenerator.generation;
+package ghastlith.cerberus.generation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
