@@ -1,4 +1,4 @@
-package ghastlith.cerberus.generation;
+package ghastlith.babel.generation;
 
 import java.security.SecureRandom;
 import java.time.Instant;

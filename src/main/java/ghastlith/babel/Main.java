@@ -1,4 +1,4 @@
-package ghastlith.cerberus;
+package ghastlith.babel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -6,9 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import ghastlith.cerberus.argument.ArgumentProcessor;
-import ghastlith.cerberus.generation.GenerationEngine;
-import ghastlith.cerberus.generation.GenerationPolicy;
+import ghastlith.babel.argument.ArgumentProcessor;
+import ghastlith.babel.generation.GenerationEngine;
+import ghastlith.babel.generation.GenerationPolicy;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

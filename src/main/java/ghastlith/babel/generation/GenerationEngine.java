@@ -1,8 +1,8 @@
-package ghastlith.cerberus.generation;
+package ghastlith.babel.generation;
 
-import static ghastlith.cerberus.generation.CharacterSet.LETTERS;
-import static ghastlith.cerberus.generation.CharacterSet.NUMBERS;
-import static ghastlith.cerberus.generation.CharacterSet.SPECIAL;
+import static ghastlith.babel.generation.CharacterSet.LETTERS;
+import static ghastlith.babel.generation.CharacterSet.NUMBERS;
+import static ghastlith.babel.generation.CharacterSet.SPECIAL;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 

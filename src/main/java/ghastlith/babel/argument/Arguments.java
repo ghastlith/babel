@@ -1,4 +1,4 @@
-package ghastlith.cerberus.argument;
+package ghastlith.babel.argument;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package ghastlith.cerberus.argument;
+package ghastlith.babel.argument;
 
 import org.springframework.stereotype.Component;
 

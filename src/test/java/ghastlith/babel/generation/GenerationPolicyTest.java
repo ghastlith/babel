@@ -1,4 +1,4 @@
-package ghastlith.cerberus.generation;
+package ghastlith.babel.generation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import ghastlith.cerberus.argument.Arguments;
+import ghastlith.babel.argument.Arguments;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 

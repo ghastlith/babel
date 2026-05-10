@@ -1,4 +1,4 @@
-package ghastlith.cerberus.generation;
+package ghastlith.babel.generation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

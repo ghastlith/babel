@@ -1,4 +1,4 @@
-package ghastlith.cerberus;
+package ghastlith.babel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,6 +1,6 @@
-package ghastlith.cerberus.generation;
+package ghastlith.babel.generation;
 
-import ghastlith.cerberus.argument.Arguments;
+import ghastlith.babel.argument.Arguments;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Builder;

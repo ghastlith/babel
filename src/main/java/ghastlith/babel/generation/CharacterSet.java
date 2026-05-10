@@ -1,4 +1,4 @@
-package ghastlith.cerberus.generation;
+package ghastlith.babel.generation;
 
 /**
  * Wrapper class that delegates static sets containing the lists of characters

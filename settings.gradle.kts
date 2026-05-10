@@ -1,1 +1,1 @@
-rootProject.name = "cerberus"
+rootProject.name = "babel";
