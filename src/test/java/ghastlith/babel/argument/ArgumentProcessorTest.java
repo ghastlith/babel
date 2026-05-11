@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 
+import picocli.CommandLine.OverwrittenOptionException;
 import picocli.CommandLine.ParameterException;
 
 @ExtendWith(OutputCaptureExtension.class)
@@ -74,6 +75,18 @@ public class ArgumentProcessorTest {
   }
 
   @Test
+  void parse_shouldParseSuccessfullyWhenKeyValueArgumentsProvided() {
+    // given
+    final var args = new String[] { "--length", "30" };
+
+    // when
+    final var arguments = argumentProcessor.parse(args);
+
+    // then
+    assertThat(arguments.getLength()).isEqualTo(30);
+  }
+
+  @Test
   void parse_shouldCaptureAndLogUnmatchedArgumentListWhenProvided(final CapturedOutput output) {
     // given
     final var args = new String[] { "--unmatched=argument" };
@@ -108,6 +121,18 @@ public class ArgumentProcessorTest {
 
     // then
     assertThat(throwable).isInstanceOf(ParameterException.class);
+  }
+
+  @Test
+  void parse_shouldThrowOverwrittenOptionExceptionWhenNamedArgumentIsDuplicated() {
+    // given
+    final var args = new String[] { "--length=16", "--length=32" };
+
+    // when
+    final var throwable = catchThrowable(() -> argumentProcessor.parse(args));
+
+    // then
+    assertThat(throwable).isInstanceOf(OverwrittenOptionException.class);
   }
 
 }
