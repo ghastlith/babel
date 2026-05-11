@@ -13,11 +13,11 @@ import picocli.CommandLine.Unmatched;
 @Getter
 public class Arguments {
 
-  @Option(names = "--length", defaultValue = "20")
-  private int length;
+  @Option(names = "--length")
+  private int length = 20;
 
-  @Option(names = "--alphanumeric", defaultValue = "false")
-  private boolean isAlphanumeric;
+  @Option(names = "--alphanumeric")
+  private boolean isAlphanumeric = false;
 
   @Unmatched
   private List<String> unmatched = new ArrayList<>();
