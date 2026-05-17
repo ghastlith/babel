@@ -36,6 +36,10 @@ dependencies {
   implementation("info.picocli:picocli:4.7.7");
 }
 
+tasks.bootJar {
+  archiveVersion.set("");
+}
+
 tasks.withType<Test>().configureEach {
   useJUnitPlatform();
 
