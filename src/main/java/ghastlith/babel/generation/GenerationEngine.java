@@ -47,7 +47,7 @@ public class GenerationEngine {
   }
 
   private String getRandomUnits(final CharacterSet set, final int length) {
-    final var characters = set.characters;
+    final var characters = set.getCharacters();
     final var upperBound = characters.length();
 
     return random.ints(RANDOM_LOWER_BOUND, upperBound)
