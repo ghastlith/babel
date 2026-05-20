@@ -1,4 +1,4 @@
-package ghastlith.babel.generation;
+package ghastlith.babel.password;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

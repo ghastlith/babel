@@ -1,4 +1,4 @@
-package ghastlith.babel.generation;
+package ghastlith.babel.password;
 
 import java.security.SecureRandom;
 import java.time.Instant;

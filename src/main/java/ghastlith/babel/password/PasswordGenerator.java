@@ -1,8 +1,8 @@
-package ghastlith.babel.generation;
+package ghastlith.babel.password;
 
-import static ghastlith.babel.generation.CharacterSet.LETTERS;
-import static ghastlith.babel.generation.CharacterSet.NUMBERS;
-import static ghastlith.babel.generation.CharacterSet.SPECIAL;
+import static ghastlith.babel.password.CharacterSet.LETTERS;
+import static ghastlith.babel.password.CharacterSet.NUMBERS;
+import static ghastlith.babel.password.CharacterSet.SPECIAL;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
@@ -22,21 +22,21 @@ import lombok.RequiredArgsConstructor;
 @Component
 @Validated
 @RequiredArgsConstructor
-public class GenerationEngine {
+public class PasswordGenerator {
 
   private final SecureRandom random;
 
   private static final int RANDOM_LOWER_BOUND = 0;
 
   /**
-   * Generate random sets of characters based on the {@link GenerationPolicy}
-   * rules and then shuffle them based on currently built entropy present on
+   * Generate random sets of characters based on the {@link PasswordPolicy} rules
+   * and then shuffle them based on currently built entropy present on
    * {@link SecureRandom}.
    *
    * @param policy the set of rules to generate a password
    * @return The generated password string.
    */
-  public String generatePassword(@Valid final GenerationPolicy policy) {
+  public String generatePassword(@Valid final PasswordPolicy policy) {
     final var letters = getRandomUnits(LETTERS, policy.lettersLength());
     final var numbers = getRandomUnits(NUMBERS, policy.numbersLength());
     final var special = getRandomUnits(SPECIAL, policy.specialLength());

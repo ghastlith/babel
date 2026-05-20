@@ -1,4 +1,4 @@
-package ghastlith.babel.generation;
+package ghastlith.babel.password;
 
 import ghastlith.babel.argument.Arguments;
 import jakarta.validation.constraints.Max;
@@ -9,7 +9,7 @@ import lombok.Builder;
  * The policy used when generating a new random password.
  */
 @Builder
-public record GenerationPolicy(
+public record PasswordPolicy(
     @Min(value = 16, message = "Length must be at least 16")
     @Max(value = 32, message = "Length must be at most 32")
     int length,
@@ -20,14 +20,14 @@ public record GenerationPolicy(
   private static final int BASE_LENGTH = 0;
 
   /**
-   * Constructor that builds a GenerationPolicy to delegate how a new password
+   * Constructor that builds a PasswordPolicy to delegate how a new password
    * should be made.
    *
    * @param arguments the {@link Arguments} inputted by the user
-   * @return The GenerationPolicy based on user inputted arguments.
+   * @return The PasswordPolicy based on user inputted arguments.
    */
-  public static GenerationPolicy fromArguments(final Arguments arguments) {
-    return GenerationPolicy.builder()
+  public static PasswordPolicy fromArguments(final Arguments arguments) {
+    return PasswordPolicy.builder()
         .length(arguments.getLength())
         .hasSymbols(!arguments.isAlphanumeric())
         .build();

@@ -1,4 +1,4 @@
-package ghastlith.babel.generation;
+package ghastlith.babel.password;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -15,7 +15,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 
 @ExtendWith(MockitoExtension.class)
-public class GenerationPolicyTest {
+public class PasswordPolicyTest {
 
   @Mock private Arguments mockArguments;
 
@@ -28,7 +28,7 @@ public class GenerationPolicyTest {
     when(mockArguments.isAlphanumeric()).thenReturn(true);
 
     // when
-    final var policy = GenerationPolicy.fromArguments(mockArguments);
+    final var policy = PasswordPolicy.fromArguments(mockArguments);
     final var violations = validator.validate(policy);
 
     // then
@@ -41,7 +41,7 @@ public class GenerationPolicyTest {
   @ValueSource(ints = { 0, 15, 35, 100 })
   void fromArguments_shouldContainViolationWhenProvidedPasswordLengthIsOutsideRange(final int length) {
     // given
-    final var policy = GenerationPolicy.builder()
+    final var policy = PasswordPolicy.builder()
         .length(length)
         .build();
 
@@ -55,7 +55,7 @@ public class GenerationPolicyTest {
   @Test
   void lettersLength_shouldReturnCalculatedAmountOfLettersCorrectlyWhenSymbolsAreEnabled() {
     // given
-    final var policy = GenerationPolicy.builder()
+    final var policy = PasswordPolicy.builder()
         .length(22)
         .hasSymbols(true)
         .build();
@@ -70,7 +70,7 @@ public class GenerationPolicyTest {
   @Test
   void lettersLength_shouldReturnCalculatedAmountOfLettersCorrectlyWhenSymbolsAreDisabled() {
     // given
-    final var policy = GenerationPolicy.builder()
+    final var policy = PasswordPolicy.builder()
         .length(22)
         .hasSymbols(false)
         .build();
@@ -85,7 +85,7 @@ public class GenerationPolicyTest {
   @Test
   void numbersLength_shouldReturnCalculatedAmountOfNumbersCorrectly() {
     // given
-    final var policy = GenerationPolicy.builder()
+    final var policy = PasswordPolicy.builder()
         .length(26)
         .build();
 
@@ -99,7 +99,7 @@ public class GenerationPolicyTest {
   @Test
   void specialLength_shouldReturnCalculatedAmountOfSpecialCharactersCorrectlyWhenSymbolsAreEnabled() {
     // given
-    final var policy = GenerationPolicy.builder()
+    final var policy = PasswordPolicy.builder()
         .length(30)
         .hasSymbols(true)
         .build();
@@ -114,7 +114,7 @@ public class GenerationPolicyTest {
   @Test
   void specialLength_shouldReturnCalculatedAmountOfSpecialCharactersCorrectlyWhenSymbolsAreDisabled() {
     // given
-    final var policy = GenerationPolicy.builder()
+    final var policy = PasswordPolicy.builder()
         .length(30)
         .hasSymbols(false)
         .build();

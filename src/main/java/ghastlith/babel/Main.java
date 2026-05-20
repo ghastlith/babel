@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import ghastlith.babel.argument.ArgumentProcessor;
-import ghastlith.babel.generation.GenerationEngine;
-import ghastlith.babel.generation.GenerationPolicy;
+import ghastlith.babel.password.PasswordGenerator;
+import ghastlith.babel.password.PasswordPolicy;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,7 +19,7 @@ public class Main implements CommandLineRunner {
 
   @Autowired private ApplicationContext context;
   @Autowired private ArgumentProcessor argumentProcessor;
-  @Autowired private GenerationEngine generationEngine;
+  @Autowired private PasswordGenerator passwordGenerator;
 
   private static final int BASE_ERROR_CODE = 1;
 
@@ -31,8 +31,8 @@ public class Main implements CommandLineRunner {
   public void run(final String... args) throws Exception {
     try {
       final var arguments = argumentProcessor.parse(args);
-      final var policy = GenerationPolicy.fromArguments(arguments);
-      final var password = generationEngine.generatePassword(policy);
+      final var policy = PasswordPolicy.fromArguments(arguments);
+      final var password = passwordGenerator.generatePassword(policy);
 
       log.info("generated password: {}", password);
     } catch (Exception e) {
