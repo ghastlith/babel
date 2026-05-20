@@ -3,12 +3,12 @@ package ghastlith.babel.password;
 import static ghastlith.babel.password.CharacterSet.LETTERS;
 import static ghastlith.babel.password.CharacterSet.NUMBERS;
 import static ghastlith.babel.password.CharacterSet.SPECIAL;
+import static java.util.Collections.shuffle;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
-import java.util.Collections;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -64,7 +64,7 @@ public class PasswordGenerator {
         .mapToObj(c -> (char) c)
         .collect(toList());
 
-    Collections.shuffle(characters, random);
+    shuffle(characters, random);
 
     return characters.stream()
         .map(String::valueOf)
