@@ -1,5 +1,12 @@
 package ghastlith.babel.password;
 
+import static ghastlith.babel.password.CharacterSet.LOWER_CASE_LETTERS;
+import static ghastlith.babel.password.CharacterSet.NUMBERS;
+import static ghastlith.babel.password.CharacterSet.SPECIAL;
+import static ghastlith.babel.password.CharacterSet.UPPER_CASE_LETTERS;
+
+import java.util.Map;
+
 import ghastlith.babel.argument.Arguments;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -13,11 +20,12 @@ public record PasswordPolicy(
     @Min(value = 16, message = "Length must be at least 16")
     @Max(value = 32, message = "Length must be at most 32")
     int length,
-    boolean hasSymbols
+    boolean hasSymbols,
+    Map<CharacterSet, Integer> minimumPerCharacterSet
 ) {
 
-  private static final float NON_ALPHANUMERIC_WEIGHT = 0.25f;
-  private static final int BASE_LENGTH = 0;
+  private static final Integer MINIMUM_SECTION_LENGTH = 1;
+  private static final Integer DISABLED_LENGTH = 0;
 
   /**
    * Constructor that builds a PasswordPolicy to delegate how a new password
@@ -27,40 +35,23 @@ public record PasswordPolicy(
    * @return The PasswordPolicy based on user inputted arguments.
    */
   public static PasswordPolicy fromArguments(final Arguments arguments) {
+    final var hasSymbols = !arguments.isAlphanumeric();
+    final var minimumPerCharacterSet = getMinimumPerCharacterSet(hasSymbols);
+
     return PasswordPolicy.builder()
         .length(arguments.getLength())
-        .hasSymbols(!arguments.isAlphanumeric())
+        .hasSymbols(hasSymbols)
+        .minimumPerCharacterSet(minimumPerCharacterSet)
         .build();
   }
 
-  /**
-   * Calculate the amount of letters a password should have.
-   *
-   * @return The calculated length.
-   */
-  public int lettersLength() {
-    final var numbers = numbersLength();
-    final var special = specialLength();
-
-    return length() - numbers - special;
-  }
-
-  /**
-   * Calculate the amount of numbers a password should have.
-   *
-   * @return The calculated length.
-   */
-  public int numbersLength() {
-    return (int) Math.ceil(length() * NON_ALPHANUMERIC_WEIGHT);
-  }
-
-  /**
-   * Calculate the amount of special characters a password should have.
-   *
-   * @return The calculated length.
-   */
-  public int specialLength() {
-    return hasSymbols ? numbersLength() : BASE_LENGTH;
+  private static Map<CharacterSet, Integer> getMinimumPerCharacterSet(final boolean hasSymbols) {
+    return Map.of(
+      UPPER_CASE_LETTERS, MINIMUM_SECTION_LENGTH,
+      LOWER_CASE_LETTERS, MINIMUM_SECTION_LENGTH,
+      NUMBERS, MINIMUM_SECTION_LENGTH,
+      SPECIAL, hasSymbols ? MINIMUM_SECTION_LENGTH : DISABLED_LENGTH
+    );
   }
 
 }

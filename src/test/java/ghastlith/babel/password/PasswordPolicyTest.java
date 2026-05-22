@@ -1,5 +1,6 @@
 package ghastlith.babel.password;
 
+import static ghastlith.babel.password.CharacterSet.SPECIAL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -34,6 +35,7 @@ public class PasswordPolicyTest {
     // then
     assertThat(policy.length()).isEqualTo(18);
     assertThat(policy.hasSymbols()).isNotEqualTo(mockArguments.isAlphanumeric());
+    assertThat(policy.minimumPerCharacterSet().get(SPECIAL)).isEqualTo(0);
     assertThat(violations).isEmpty();
   }
 
@@ -50,80 +52,6 @@ public class PasswordPolicyTest {
 
     // then
     assertThat(violations).isNotEmpty();
-  }
-
-  @Test
-  void lettersLength_shouldReturnCalculatedAmountOfLettersCorrectlyWhenSymbolsAreEnabled() {
-    // given
-    final var policy = PasswordPolicy.builder()
-        .length(22)
-        .hasSymbols(true)
-        .build();
-
-    // when
-    final var length = policy.lettersLength();
-
-    // then
-    assertThat(length).isEqualTo(10);
-  }
-
-  @Test
-  void lettersLength_shouldReturnCalculatedAmountOfLettersCorrectlyWhenSymbolsAreDisabled() {
-    // given
-    final var policy = PasswordPolicy.builder()
-        .length(22)
-        .hasSymbols(false)
-        .build();
-
-    // when
-    final var length = policy.lettersLength();
-
-    // then
-    assertThat(length).isEqualTo(16);
-  }
-
-  @Test
-  void numbersLength_shouldReturnCalculatedAmountOfNumbersCorrectly() {
-    // given
-    final var policy = PasswordPolicy.builder()
-        .length(26)
-        .build();
-
-    // when
-    final var length = policy.numbersLength();
-
-    // then
-    assertThat(length).isEqualTo(7);
-  }
-
-  @Test
-  void specialLength_shouldReturnCalculatedAmountOfSpecialCharactersCorrectlyWhenSymbolsAreEnabled() {
-    // given
-    final var policy = PasswordPolicy.builder()
-        .length(30)
-        .hasSymbols(true)
-        .build();
-
-    // when
-    final var length = policy.specialLength();
-
-    // then
-    assertThat(length).isEqualTo(8);
-  }
-
-  @Test
-  void specialLength_shouldReturnCalculatedAmountOfSpecialCharactersCorrectlyWhenSymbolsAreDisabled() {
-    // given
-    final var policy = PasswordPolicy.builder()
-        .length(30)
-        .hasSymbols(false)
-        .build();
-
-    // when
-    final var length = policy.specialLength();
-
-    // then
-    assertThat(length).isEqualTo(0);
   }
 
 }

@@ -1,30 +1,27 @@
 package ghastlith.babel.password;
 
-import static ghastlith.babel.password.CharacterSet.LETTERS;
-import static ghastlith.babel.password.CharacterSet.NUMBERS;
-import static ghastlith.babel.password.CharacterSet.SPECIAL;
+import static ghastlith.babel.password.CharacterSet.allCharacters;
 import static java.util.Collections.shuffle;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
+import java.util.Map.Entry;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 
 /**
  * Manages and performs all password generation related operations.
  */
 @Component
 @Validated
-@RequiredArgsConstructor
 public class PasswordGenerator {
 
-  private final SecureRandom random;
+  private final SecureRandom random = new SecureRandom();
 
   private static final int RANDOM_LOWER_BOUND = 0;
 
@@ -37,17 +34,29 @@ public class PasswordGenerator {
    * @return The generated password string.
    */
   public String generate(@Valid final PasswordPolicy policy) {
-    final var letters = getRandomUnits(LETTERS, policy.lettersLength());
-    final var numbers = getRandomUnits(NUMBERS, policy.numbersLength());
-    final var special = getRandomUnits(SPECIAL, policy.specialLength());
+    final var requiredCharacters = policy.minimumPerCharacterSet()
+        .entrySet()
+        .stream()
+        .map(this::getRandomCharacters)
+        .collect(joining());
 
-    final var password = mergeAndShuffle(letters, numbers, special);
+    final var unreservedLength = policy.length() - requiredCharacters.length();
+    final var unreservedSet = allCharacters(policy.hasSymbols());
+    final var unreservedCharacters = getRandomCharacters(unreservedSet, unreservedLength);
+
+    final var password = mergeAndShuffle(requiredCharacters, unreservedCharacters);
 
     return password;
   }
 
-  private String getRandomUnits(final CharacterSet set, final int length) {
-    final var characters = set.getCharacters();
+  private String getRandomCharacters(final Entry<CharacterSet, Integer> entry) {
+    final var characters = entry.getKey().getCharacters();
+    final var length = entry.getValue();
+
+    return getRandomCharacters(characters, length);
+  }
+
+  private String getRandomCharacters(final String characters, final int length) {
     final var upperBound = characters.length();
 
     return random.ints(RANDOM_LOWER_BOUND, upperBound)

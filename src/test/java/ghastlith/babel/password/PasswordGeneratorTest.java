@@ -2,21 +2,21 @@ package ghastlith.babel.password;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.security.SecureRandom;
-
 import org.junit.jupiter.api.Test;
+
+import ghastlith.babel.argument.ArgumentProcessor;
 
 public class PasswordGeneratorTest {
 
-  private final SecureRandom random = new SecureRandom();
-  private final PasswordGenerator passwordGenerator = new PasswordGenerator(random);
+  private final ArgumentProcessor argumentsProcessor = new ArgumentProcessor();
+  private final PasswordGenerator passwordGenerator = new PasswordGenerator();
 
   @Test
   void generate_shouldGeneratePasswordWithCorrectLength() {
     // given
-    final var policy = PasswordPolicy.builder()
-        .length(20)
-        .build();
+    final var arguments = new String[] { "--length=20" };
+    final var parsed = argumentsProcessor.parse(arguments);
+    final var policy = PasswordPolicy.fromArguments(parsed);
 
     // when
     final var password = passwordGenerator.generate(policy);
@@ -26,33 +26,27 @@ public class PasswordGeneratorTest {
   }
 
   @Test
-  void generate_shouldGeneratePasswordWithIntentedAmountOfCharactersBasedOnType() {
+  void generate_shouldGeneratePasswordWithoutSpecialCharactersWhenSymbolsEnabled() {
     // given
-    final var policy = PasswordPolicy.builder()
-        .length(24)
-        .hasSymbols(true)
-        .build();
+    final var arguments = new String[] { "--length=32" };
+    final var parsed = argumentsProcessor.parse(arguments);
+    final var policy = PasswordPolicy.fromArguments(parsed);
 
     // when
     final var password = passwordGenerator.generate(policy);
 
-    final var letters = password.chars().filter(Character::isLetter).count();
-    final var numbers = password.chars().filter(Character::isDigit).count();
-    final var special = password.chars().filter(c -> !Character.isLetterOrDigit(c)).count();
+    final var hasSpecial = password.chars().anyMatch(c -> !Character.isLetterOrDigit(c));
 
     // then
-    assertThat(letters).isEqualTo(policy.lettersLength());
-    assertThat(numbers).isEqualTo(policy.numbersLength());
-    assertThat(special).isEqualTo(policy.specialLength());
+    assertThat(hasSpecial).isTrue();
   }
 
   @Test
   void generate_shouldGeneratePasswordWithoutSpecialCharactersWhenSymbolsDisabled() {
     // given
-    final var policy = PasswordPolicy.builder()
-        .length(32)
-        .hasSymbols(false)
-        .build();
+    final var arguments = new String[] { "--length=32", "--alphanumeric" };
+    final var parsed = argumentsProcessor.parse(arguments);
+    final var policy = PasswordPolicy.fromArguments(parsed);
 
     // when
     final var password = passwordGenerator.generate(policy);
