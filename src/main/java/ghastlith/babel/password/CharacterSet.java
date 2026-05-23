@@ -22,12 +22,13 @@ public enum CharacterSet {
 
   private final String characters;
 
+  private static final Predicate<CharacterSet> WITHOUT_SPECIAL = set -> set != SPECIAL;
   private static final Predicate<CharacterSet> NO_OP_FILTER = x -> true;
 
   public static String allCharacters(final boolean hasSymbols) {
     return EnumSet.allOf(CharacterSet.class)
         .stream()
-        .filter(hasSymbols ? NO_OP_FILTER : set -> set != SPECIAL)
+        .filter(!hasSymbols ? WITHOUT_SPECIAL : NO_OP_FILTER)
         .map(CharacterSet::getCharacters)
         .collect(joining());
   }
