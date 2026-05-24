@@ -28,11 +28,11 @@ public record PasswordPolicy(
   private static final Integer DISABLED_LENGTH = 0;
 
   /**
-   * Constructor that builds a PasswordPolicy to delegate how a new password
-   * should be made.
+   * Constructor that builds a {@link PasswordPolicy} to delegate how a new
+   * password should be made.
    *
    * @param arguments the {@link Arguments} inputted by the user
-   * @return The PasswordPolicy based on user inputted arguments.
+   * @return The {@link PasswordPolicy} based on user inputted arguments.
    */
   public static PasswordPolicy fromArguments(final Arguments arguments) {
     final var hasSymbols = !arguments.isAlphanumeric();
