@@ -1,6 +1,6 @@
 # babel
 
-A simple application that generates random passwords with customizable patterns. The generation is based on Java's SecureRandom and Instant timestamp at time of usage to increase entropy.
+A simple application that generates random passwords with customizable patterns. The generation is based on Java's SecureRandom to use maxium possible entropy.
 
 ### options
 
