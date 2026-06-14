@@ -17,9 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Main implements CommandLineRunner {
 
-  @Autowired private ApplicationContext context;
-  @Autowired private ArgumentProcessor argumentProcessor;
-  @Autowired private PasswordGenerator passwordGenerator;
+  private ApplicationContext context;
+  private ArgumentProcessor argumentProcessor;
+  private PasswordGenerator passwordGenerator;
 
   private static final int BASE_ERROR_CODE = 1;
 
