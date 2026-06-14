@@ -26,8 +26,7 @@ public class ArgumentProcessor {
 
     parserFor(input).parseArgs(args);
 
-    input.getUnmatched()
-        .forEach(arg -> log.warn(UNMATCHED_LOG_FORMAT, arg));
+    input.getUnmatched().forEach(arg -> log.warn(UNMATCHED_LOG_FORMAT, arg));
 
     return input;
   }
